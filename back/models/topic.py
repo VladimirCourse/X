@@ -3,3 +3,5 @@ class Topic:
         self.topic = None
         self.origin = None
         self.destination = None
+        self.weatherSuggestion = None
+        self.weatherTemp = None

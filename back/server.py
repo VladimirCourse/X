@@ -1,5 +1,7 @@
 import os, json
 
+from sys import argv
+
 from bottle import route, run, request, Bottle, response
 
 from controllers.chat_controller import ChatController
@@ -7,6 +9,8 @@ from controllers.chat_controller import ChatController
 from helpers.database import Database
 
 chat = ChatController()
+
+APP = Bottle()
 
 def enable_cors(fn):
     def _enable_cors(*args, **kwargs):
@@ -22,14 +26,14 @@ def enable_cors(fn):
 
     return _enable_cors
 
-@route('/message', method=['OPTIONS', 'POST'])
+@APP.route('/message', method=['OPTIONS', 'POST'])
 @enable_cors
 def message():
     postdata = json.load(request.body)['message']
     res = chat.interact(postdata, 'abc')
     return json.dumps(res.dict())
     
-@route('/messages', method=['OPTIONS', 'GET'])
+@APP.route('/messages', method=['OPTIONS', 'GET'])
 @enable_cors
 def messages():
     messages = Database().get_messages('abc')
@@ -38,26 +42,26 @@ def messages():
         res.append(msg.dict())
     return json.dumps(res)
 
-@route('/topic', method=['GET', 'OPTIONS'])
+@APP.route('/topic', method=['GET', 'OPTIONS'])
 @enable_cors
 def topic():
     return json.dumps(Database().get_topic('abc').__dict__)
 
-@route('/flight', method=['GET', 'OPTIONS'])
+@APP.route('/flight', method=['GET', 'OPTIONS'])
 @enable_cors
 def flight():
     res = Database().get_flight('abc')
     if res:
         return json.dumps(res.__dict__)
 
-@route('/hotel', method=['GET', 'OPTIONS'])
+@APP.route('/hotel', method=['GET', 'OPTIONS'])
 @enable_cors
 def hotel():
     res = Database().get_hotel('abc')
     if res:
         return json.dumps(res.__dict__)
 
-@route('/places', method=['OPTIONS', 'GET'])
+@APP.route('/places', method=['OPTIONS', 'GET'])
 @enable_cors
 def places():
     places = Database().get_places('abc')
@@ -66,7 +70,7 @@ def places():
         res.append(msg.__dict__)
     return json.dumps(res)
 
-@route('/food', method=['OPTIONS', 'GET'])
+@APP.route('/food', method=['OPTIONS', 'GET'])
 @enable_cors
 def food():
     food = Database().get_food('abc')
@@ -75,5 +79,13 @@ def food():
         res.append(msg.__dict__)
     return json.dumps(res)
 
+HOST = os.environ.get('SERVER_HOST', 'localhost')
+try:    
+    PORT = int(os.environ.get('SERVER_PORT', '5555'))
+except ValueError:
+    PORT = 5555
 
-run(host='localhost', port=5000, debug=True)
+run(application=APP, server='wsgiref', host='0.0.0.0', port=argv[1])
+
+
+#run(application=APP, host='localhost', port=5000, debug=True)

@@ -49,6 +49,12 @@ class ChatComponent implements OnInit {
     hotel = await messageService.getHotel();
     places = await messageService.getPlaces();
     food = await messageService.getFood();
+
+    Timer.periodic(Duration(seconds: 1), 
+      (timer) async{
+        messages = await messageService.getMessages();  
+      }
+    );
   }
 
   void add(String msg) async {

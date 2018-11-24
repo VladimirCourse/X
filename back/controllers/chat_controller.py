@@ -2,6 +2,7 @@ from helpers.luis import Luis
 from helpers.data_provider import DataProvider
 from helpers.database import Database
 from helpers.iata import Iata
+from weather import Weather, Unit
 
 from models.answer import Answer
 
@@ -17,8 +18,24 @@ class ChatController:
         topic.topic = 'flight_found'
         topic.origin = 'Moscow'
         topic.destination = dest
+
+        weather = Weather(unit=Unit.CELSIUS)
+        locOrig = weather.lookup_by_location(topic.origin)
+        locDest = weather.lookup_by_location(topic.destination)
+        
+        origCond = locOrig.condition
+        destCond = locDest.condition
+        
+        topic.weatherTemp = destCond.temp
+
+        if origCond.temp < destCond.temp:
+            topic.weatherSuggestion = 'It will be warmer than in {}, don\'t take warm clothes.'.format(topic.origin)
+        else:
+            topic.weatherSuggestion = 'It will be colder than in {}, take warm clothes!'.format(topic.origin)
+
         self.db.set_topic(token, topic)
         self.db.set_flight(token, flight)
+        
 
     def magic_sorted(self, coll):
         coll.sort(key=lambda p: p.price)
@@ -45,15 +62,20 @@ class ChatController:
                         res = self.data.get_flights('Moscow')
                         res = self.magic_sorted(res)
                         self.save_flight(token, res, Iata().get_city_name(res.destination))
+                        
+                        self.db.set_places(token, [])
+                        self.db.set_hotel(token, None)
+                        
                         return Answer('flights_from', data=res)
                     else:
                         res = self.data.get_flights('Moscow', dest=result.entities[0].entity)
                         res = self.magic_sorted(res)
                         self.save_flight(token, res, result.entities[0].entity)
+                        
+                        self.db.set_places(token, [])
+                        self.db.set_hotel(token, None)
+
                         return Answer('flights_to', data=res)
-                    
-                    self.db.set_places(token, [])
-                    self.db.set_hotel(token, None)
                     
                 elif result.intent == 'Travel.Hotel':
                     topic = self.db.get_topic(token)

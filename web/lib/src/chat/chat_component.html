@@ -2,12 +2,9 @@
     <div *ngIf="topic.topic != null" class="col-sm-4" style="overflow-y: scroll; height:100vh;">
         <section class="head-image" style="background-image: url(img/baner-2.svg)">
             <div class="head-image__descr">
-                <div class="head-image__descr__progress">
-                    <div class="head-image__descr__progress__bar">
-                        <div class="head-image__descr__progress__bar__width" style="width: 80%"></div>
-                    </div>
-                </div>
                 <h2 class="head-image__descr__name">{{topic.origin.substring(0, 1).toUpperCase() + topic.origin.substring(1).toLowerCase()}} - {{topic.destination.substring(0, 1).toUpperCase() + topic.destination.substring(1).toLowerCase()}}</h2>
+                <h6><p style="color:white;"> {{topic.weatherTemp}}°C </p></h6>
+                <h6><p style="color:white;"> {{topic.weatherSuggestion}} </p></h6>
             </div>
         </section>
         

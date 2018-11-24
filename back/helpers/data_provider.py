@@ -50,7 +50,7 @@ class DataProvider:
         res = []
         for result in results:
             res.append(Place(result, 'food', price=random.randint(7, 25)))
-
+        random.shuffle(res)
         return res
 
     def get_places(self, origin):
@@ -58,6 +58,6 @@ class DataProvider:
         res = []
         for result in results:
             res.append(Place(result, 'sight', score=random.randint(5, 10)))
-    
+        random.shuffle(res)
         return res
         
