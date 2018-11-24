@@ -1,50 +1,174 @@
-
-<div class="container">
-  <div class="messaging">
-    <div class="inbox_msg">
-      <div class="mesgs">
-        <div class="msg_history">
-          <div *ngIf="items.isNotEmpty">
-            <ul>
-                <li *ngFor="let item of items; let i=index">
-                  <div *ngIf="item.isMy">
-                    <div class="outgoing_msg">
-                      <div class="sent_msg">
-                        <p>{{item.message}}</p>
-                        <span class="time_date"> 11:01 AM    |    June 9</span> 
-                      </div>
+<div class="row">
+    <div *ngIf="topic.topic != null" class="col-sm-6" style="overflow-y: scroll; height:100vh;">
+        <div class="head-page">
+            <h1 class="head-page__text">Детали маршрута</h1>
+        </div>
+        <section class="head-image" style="background-image: url(img/baner-2.svg)">
+            <div class="head-image__descr">
+                <div class="head-image__descr__progress">
+                    <p>8.0</p>
+                    <div class="head-image__descr__progress__bar">
+                        <div class="head-image__descr__progress__bar__width" style="width: 80%"></div>
                     </div>
-                  </div>
-                  <div *ngIf="!item.isMy">
-                    <div class="outgoing_msg">
-                        <div class="incoming_msg">
-                          <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                          <div class="received_msg">
-                            <div class="received_withd_msg">
+                </div>
+                <h2 class="head-image__descr__name">Москва - Милан</h2>
+            </div>
+        </section>
+        
+        <section class="body-content">
+            <div class="body-content__block">
+                <div *ngIf="flight != null" class="tickets">
+                    <div class="tickets__item">
+                        <div class="tickets__item__top">
+                            <p class="price">{{flight.price.toStringAsFixed(1)}} EUR</p>
+                            <font color="blue" font-size="20px">{{flight.gate}}</font>
+                        </div>
+                        <div class="tickets__item__mid">
+                            <p>1 passenger</p>
+                        </div>
+                        <div class="tickets__item__bott">
+                            <div class="tickets__item__bott__item">
+                                <p class="h">Route</p>
+                                <p class="info">>{{flight.origin}} - {{flight.destination}}</p>
+                            </div>
+                            <div class="tickets__item__bott__item">
+                                <p class="h">Date</p>
+                                <p class="info">{{flight.departDate}}</p>
+                            </div>
+                            <div class="tickets__item__bott__item">
+                                <p class="h">Пересадки</p>
+                                <p class="info">Прямой</p>
+                            </div>
+                        </div>
+                        <div class="tickets__item__pick">
+                            <p class="not-picked">Выбрать</p>
+                            <p class="picked">Выбрано</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="body-content__block">
+                <h4 class="body-content__block__head">
+                    Жилье в Милане
+                </h4>
+                <div class="cards">
+                    <div class="cards__item">
+                        <div class="cards__item__img" style="background-image: url(img/hotel.jpg);"></div>
+                        <div class="cards__item__descr">
+                            <p class="name">Hôtel de France Gare de Lyon Bastille </p>
+                            <p class="price">2 560 ₽<span>/1 ночь</span></p>
+                        </div>
+                        <div class="cards__item__pick js-uniq-1">
+                            <p class="not-picked">Выбрать</p>
+                            <p class="picked">Выбрано</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="body-content__block">
+                <h4 class="body-content__block__head">
+                    Еда в Милане
+                </h4>
+                <div class="cards">
+                    <div class="cards__item">
+                        <div class="cards__item__img" style="background-image: url(img/food.jpg);"></div>
+                        <div class="cards__item__descr">
+                            <p class="name">Le Cinq</p>
+                            <p class="mid">Средний чек</p>
+                            <p class="bott">€15</p>
+                        </div>
+                        <div class="cards__item__pick js-uniq-2">
+                            <p class="not-picked">Выбрать</p>
+                            <p class="picked">Выбрано</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="body-content__block">
+                <h4 class="body-content__block__head">
+                    Маршруты
+                </h4>
+                <div class="trips">
+                    <div class="trips__item color-1">
+                        <p class="top">По средневековой<br> архитектуре</p>
+                        <p class="bott">15 km</p>
+                    </div>
+                    <div class="trips__item color-2">
+                        <p class="top">Популярные<br>музеи</p>
+                        <p class="bott">36 km</p>
+                    </div>
+                    <div class="trips__item color-3">
+                        <p class="top">Лучшие<br>парки</p>
+                        <p class="bott">14 km</p>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        <div class="final-price">
+            <div class="final-price__left">
+                <p><span>ИТОГО:</span>  13, 560 ₽</p>
+            </div>
+            <div class="final-price__right">
+                <button>купить</button>
+            </div>
+        </div>
+
+
+    </div>  
+    <div [ngClass]="{'col-sm-6': topic.topic != null, 'col-md-12': topic.topic == null}" >
+      <div class="container">
+        <div class="messaging">
+          <div class="inbox_msg">
+            <div class="mesgs">
+              <div class="msg_history">
+                <div *ngIf="messages.isNotEmpty">
+                  <ul>
+                      <li *ngFor="let item of messages; let i=index">
+                        <div *ngIf="item.isMy">
+                          <div class="outgoing_msg">
+                            <div class="sent_msg">
                               <p>{{item.message}}</p>
-                              <span class="time_date"> 11:01 AM    |    June 9</span>
+                              <span class="time_date"> 11:01 AM    |    June 9</span> 
                             </div>
                           </div>
                         </div>
-                    </div>
-                  </div>
-                </li>
-            </ul>
-          </div>
+                        <div *ngIf="!item.isMy">
+                          <div class="outgoing_msg">
+                              <div class="incoming_msg">
+                                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="received_msg">
+                                  <div class="received_withd_msg">
+                                    <p>{{item.message}}</p>
+                                    <span class="time_date"> 11:01 AM    |    June 9</span>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="type_msg">
+                <div class="input_msg_write">
+                  <input #message                 
+                  (keyup.enter)="add(message.value); message.value = ''"
+                  type="text" class="write_msg" placeholder="Type a message"/>
+                  <button class="msg_send_btn" 
+                      (click)="add(message.value); message.value = ''">
+                      <i class="fa fa-paper-plane-o" aria-hidden="true">           
+                      </i>
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>          
         </div>
-        <div class="type_msg">
-          <div class="input_msg_write">
-            <input #message                 
-            (keyup.enter)="add(message.value); message.value = ''"
-            type="text" class="write_msg" placeholder="Type a message"/>
-            <button class="msg_send_btn" 
-                (click)="add(message.value); message.value = ''">
-                <i class="fa fa-paper-plane-o" aria-hidden="true">           
-                </i>
-              </button>
-          </div>
-        </div>
-      </div>
-    </div>          
-  </div>
+      </div>      
+    </div>
 </div>
+
+

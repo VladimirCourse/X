@@ -5,8 +5,23 @@ class Message {
   bool isMy;
 
   String message;
-  DateTime createdAt;
+  String messageType;
+  String createdAt;
 
-  Message({this.id, this.message, this.createdAt, this.isMy = false});
+  dynamic data;
+
+  Message({this.id, this.message, this.messageType, this.data, this.createdAt, this.isMy = false});
+
+  factory Message.fromJson(Map<String, dynamic> json){
+    var res = Message(
+      id: json['id'],
+      message: json['message'],
+      messageType: json['message_type'],
+      createdAt: json['created_at'],
+      data: json['data']
+    );
+
+    return res;
+  }
 
 }
