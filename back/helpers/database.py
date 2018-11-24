@@ -8,6 +8,7 @@ class Database:
             self.topics = {}
             self.flights = {}
             self.hotels = {}
+            self.places = {}
 
     instance = None
     
@@ -44,3 +45,9 @@ class Database:
 
     def set_hotel(self, token, hotel):
         self.instance.hotels[token] = hotel
+
+    def get_places(self, token):
+        return self.instance.places.get(token)
+
+    def set_places(self, token, places):
+        self.instance.places[token] = places

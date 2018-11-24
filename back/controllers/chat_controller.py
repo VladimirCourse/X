@@ -48,6 +48,19 @@ class ChatController:
                         return Answer('hotel', data=res)
                     else:
                         return Answer('no_topic')
+                elif result.intent == 'Travel.Places':
+                    topic = self.db.get_topic(token)
+                    if topic.destination:
+                        res = self.data.get_places(topic.destination)
+                        
+                        topic = self.db.get_topic(token)
+                        topic.topic = 'places_found'
+                        self.db.set_topic(token, topic)
+                        #self.db.set_hotel(token, res)
+
+                        return Answer('places', data=res)
+                    else:
+                        return Answer('no_topic')
                 else:   
                     return Answer('not_understand')
             else:

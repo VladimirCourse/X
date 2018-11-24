@@ -35,15 +35,13 @@ def messages():
     messages = Database().get_messages('abc')
     res = []
     for msg in messages:
-        res.append(msg.__dict__)
+        res.append(msg.dict())
     return json.dumps(res)
-
 
 @route('/topic', method=['GET', 'OPTIONS'])
 @enable_cors
 def topic():
     return json.dumps(Database().get_topic('abc').__dict__)
-
 
 @route('/flight', method=['GET', 'OPTIONS'])
 @enable_cors
