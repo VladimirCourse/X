@@ -52,14 +52,18 @@ class ChatComponent implements OnInit {
   void add(String msg) async {
     messages.add(Message(message: msg, messageType: 'my_message'));
     var res = await messageService.sendMessage(msg);
-    topic = await messageService.getTopic();
+    print(res.messageType);
     if (res != null){ 
       if (res.messageType == 'flights_from' || res.messageType == 'flights_to'){
         flight = Flight.fromJson(res.data);
       } else if (res.messageType == 'hotel'){
         hotel = Place.fromJson(res.data);
+      } else if (res.messageType == 'places'){
+        places = res.data.map<Place>((p) => Place.fromJson(p)).toList();
       }
     }
+
+    topic = await messageService.getTopic();
 
     message = '';
   }

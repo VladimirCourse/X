@@ -86,26 +86,20 @@
                     </div>
                 </div>
             </div>
-            <div class="body-content__block">
+            <div *ngIf="places != null && places.isNotEmpty" class="body-content__block">
                 <h4 class="body-content__block__head">
-                    Маршруты
+                    Interesting places
                 </h4>
                 <div class="trips">
-                    <div class="trips__item color-1">
-                        <p class="top">По средневековой<br> архитектуре</p>
-                        <p class="bott">15 km</p>
+                    <div *ngFor="let item of places; let i=index">
+                        <div class='trips__item color-1'>
+                            <p class="top">{{item.name}}</p>
+                            <p class="bott">15 km</p>
+                        </div>
                     </div>
-                    <div class="trips__item color-2">
-                        <p class="top">Популярные<br>музеи</p>
-                        <p class="bott">36 km</p>
-                    </div>
-                    <div class="trips__item color-3">
-                        <p class="top">Лучшие<br>парки</p>
-                        <p class="bott">14 km</p>
-                    </div>
+                   
                 </div>
             </div>
-            
         </section>
         <div class="final-price">
             <div class="final-price__left">
@@ -115,7 +109,6 @@
                 <button>купить</button>
             </div>
         </div>
-
 
     </div>  
     <div [ngClass]="{'col-sm-8': topic.topic != null, 'col-md-12': topic.topic == null}" >

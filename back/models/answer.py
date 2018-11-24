@@ -6,7 +6,7 @@ class Answer:
 
     def dict(self):
         res = {
-            'message_type': self.messageType,
+            'messageType': self.messageType,
             'message': self.message
         }
 
@@ -14,5 +14,9 @@ class Answer:
             res['data'] = self.data.__dict__
         elif self.messageType =='hotel':
             res['data'] = self.data.__dict__
-
+        elif self.messageType == 'places':
+            tmp = []
+            for place in self.data:
+                tmp.append(place.__dict__)
+            res['data'] = tmp
         return res
