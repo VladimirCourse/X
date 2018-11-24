@@ -1,26 +1,25 @@
 <div class="row">
-    <div *ngIf="topic.topic != null" class="col-sm-6" style="overflow-y: scroll; height:100vh;">
-        <div class="head-page">
-            <h1 class="head-page__text">Детали маршрута</h1>
-        </div>
+    <div *ngIf="topic.topic != null" class="col-sm-4" style="overflow-y: scroll; height:100vh;">
         <section class="head-image" style="background-image: url(img/baner-2.svg)">
             <div class="head-image__descr">
                 <div class="head-image__descr__progress">
-                    <p>8.0</p>
                     <div class="head-image__descr__progress__bar">
                         <div class="head-image__descr__progress__bar__width" style="width: 80%"></div>
                     </div>
                 </div>
-                <h2 class="head-image__descr__name">Москва - Милан</h2>
+                <h2 class="head-image__descr__name">{{topic.origin.substring(0, 1).toUpperCase() + topic.origin.substring(1).toLowerCase()}} - {{topic.destination.substring(0, 1).toUpperCase() + topic.destination.substring(1).toLowerCase()}}</h2>
             </div>
         </section>
         
         <section class="body-content">
             <div class="body-content__block">
                 <div *ngIf="flight != null" class="tickets">
+                    <h4 class="body-content__block__head">
+                        Air ticket
+                    </h4>
                     <div class="tickets__item">
                         <div class="tickets__item__top">
-                            <p class="price">{{flight.price.toStringAsFixed(1)}} EUR</p>
+                            <p class="price">{{flight.price.toStringAsFixed(1)}}€</p>
                             <font color="blue" font-size="20px">{{flight.gate}}</font>
                         </div>
                         <div class="tickets__item__mid">
@@ -29,36 +28,36 @@
                         <div class="tickets__item__bott">
                             <div class="tickets__item__bott__item">
                                 <p class="h">Route</p>
-                                <p class="info">>{{flight.origin}} - {{flight.destination}}</p>
+                                <p class="info">{{flight.origin}} - {{flight.destination}}</p>
                             </div>
                             <div class="tickets__item__bott__item">
                                 <p class="h">Date</p>
                                 <p class="info">{{flight.departDate}}</p>
                             </div>
                             <div class="tickets__item__bott__item">
-                                <p class="h">Пересадки</p>
-                                <p class="info">Прямой</p>
+                                <p class="h">Changes</p>
+                                <p class="info">Direct</p>
                             </div>
                         </div>
-                        <div class="tickets__item__pick">
+                        <!--<div class="tickets__item__pick">
                             <p class="not-picked">Выбрать</p>
                             <p class="picked">Выбрано</p>
-                        </div>
+                        </div>!-->
                     </div>
                 </div>
                 
             </div>
             
-            <div class="body-content__block">
+            <div *ngIf="hotel != null" class="body-content__block">
                 <h4 class="body-content__block__head">
-                    Жилье в Милане
+                    Accomodation in {{topic.destination.substring(0, 1).toUpperCase() + topic.destination.substring(1).toLowerCase()}}
                 </h4>
                 <div class="cards">
                     <div class="cards__item">
                         <div class="cards__item__img" style="background-image: url(img/hotel.jpg);"></div>
                         <div class="cards__item__descr">
-                            <p class="name">Hôtel de France Gare de Lyon Bastille </p>
-                            <p class="price">2 560 ₽<span>/1 ночь</span></p>
+                            <p class="name">{{hotel.name}}</p>
+                            <p class="price">{{hotel.price}}€<span>/per night</span></p>
                         </div>
                         <div class="cards__item__pick js-uniq-1">
                             <p class="not-picked">Выбрать</p>
@@ -67,6 +66,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="body-content__block">
                 <h4 class="body-content__block__head">
                     Еда в Милане
@@ -118,7 +118,7 @@
 
 
     </div>  
-    <div [ngClass]="{'col-sm-6': topic.topic != null, 'col-md-12': topic.topic == null}" >
+    <div [ngClass]="{'col-sm-8': topic.topic != null, 'col-md-12': topic.topic == null}" >
       <div class="container">
         <div class="messaging">
           <div class="inbox_msg">
@@ -127,7 +127,7 @@
                 <div *ngIf="messages.isNotEmpty">
                   <ul>
                       <li *ngFor="let item of messages; let i=index">
-                        <div *ngIf="item.isMy">
+                        <div *ngIf="item.messageType == 'my_message'">
                           <div class="outgoing_msg">
                             <div class="sent_msg">
                               <p>{{item.message}}</p>
@@ -135,7 +135,7 @@
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="!item.isMy">
+                        <div *ngIf="item.messageType == 'user_message'">
                           <div class="outgoing_msg">
                               <div class="incoming_msg">
                                 <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>

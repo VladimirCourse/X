@@ -1,5 +1,5 @@
 import urllib.request
-import json
+import json, random
 import foursquare
 
 from models.flight import Flight
@@ -41,7 +41,7 @@ class DataProvider:
         results = self.client.venues.search(params={'near': origin, 'query': 'hotel', 'categoryId': '4bf58dd8d48988d1fa931735'})['venues']
         res = []
         for result in results:
-            res.append(Place(result, 'hotel'))
+            res.append(Place(result, 'hotel', random.randint(50, 100)))
 
         return res
 
