@@ -1,7 +1,7 @@
 .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {
-  background: #f8f8f8 none repeat scroll 0 0;
+  background: #353131 none repeat scroll 0 0;
   float: left;
   overflow: hidden;
   width: 40%; border-right:1px solid #c4c4c4;
@@ -96,8 +96,8 @@ ul {
 }
 
  .sent_msg p {
-  background: #05728f none repeat scroll 0 0;
-  border-radius: 3px;
+  background: #44536d none repeat scroll 0 0;
+  border-radius: 23px;
   font-size: 14px;
   margin: 0; color:#fff;
   padding: 5px 10px 5px 12px;
@@ -131,10 +131,10 @@ ul {
   top: 11px;
   width: 33px;
 }
-.messaging { padding: 0 0 50px 0;}
+.messaging { padding: 0 0 0 0;}
 .msg_history {
-  height: 80vh;
-  overflow-y: auto;
+  height: 700px;
+  overflow-y: scroll;
 }
 
 /* CARDS LEFT */
@@ -191,7 +191,11 @@ button {
   text-align: center;
 }
 .head-image {
-  min-height: 200px;
+  position: fixed;
+top:0;
+min-width: 460px;
+z-index:1000;
+  min-height: 120px;
   background-size: cover;
   background-position: top right;
   display: -webkit-box;
@@ -200,7 +204,7 @@ button {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  position: relative;
+  
 }
 .head-image__descr {
   position: relative;
@@ -219,6 +223,7 @@ button {
   background: #fff;
   position: relative;
 }
+
 .head-image__descr__progress__bar__width {
   position: absolute;
   top: 0;
@@ -237,7 +242,7 @@ button {
 }
 .body-content {
   background: #F7F7F7;
-  padding: 20px 30px;
+  padding: 140px 30px ;
 }
 .body-content__block {
   margin-bottom: 25px;
@@ -299,8 +304,9 @@ button {
 }
 .tickets .tickets__item {
   background: #fff;
+  margin-right: 13px;
   margin-bottom: 13px;
-  width: 100%;
+  width: 350px;
   -webkit-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.08);
           box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -329,7 +335,7 @@ button {
   font-size: 16px;
   color: #200F32;
   opacity: 0.5;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .tickets .tickets__item__bott {
   padding: 0 12px 21px 12px;
@@ -390,7 +396,7 @@ button {
           align-items: flex-start;
 }
 .cards__item {
-  width: 100%;
+  width: 225px;
   margin: 0 10px 10px 0;
   background: #fff;
   border-radius: 10px;
@@ -402,7 +408,7 @@ button {
   border-top-right-radius: 10px;
   background-size: cover;
   background-position: center;
-  height: 170px;
+  height: 120px;
 }
 .cards__item__descr {
   padding: 5px 10px;
@@ -498,6 +504,9 @@ button {
   opacity: 0.5;
 }
 .final-price {
+  position: fixed;
+  bottom: 0;
+  width: 460px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
