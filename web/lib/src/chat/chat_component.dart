@@ -37,6 +37,7 @@ class ChatComponent implements OnInit {
   Place hotel;
   Topic topic = Topic();
   List<Place> places;
+  List<Place> food;
 
   ChatComponent(this.messageService); 
 
@@ -47,6 +48,7 @@ class ChatComponent implements OnInit {
     flight = await messageService.getFlight();
     hotel = await messageService.getHotel();
     places = await messageService.getPlaces();
+    food = await messageService.getFood();
   }
 
   void add(String msg) async {
@@ -55,11 +57,17 @@ class ChatComponent implements OnInit {
     print(res.messageType);
     if (res != null){ 
       if (res.messageType == 'flights_from' || res.messageType == 'flights_to'){
+        if (flight != null){
+          hotel = await messageService.getHotel();
+          places = await messageService.getPlaces();
+        }
         flight = Flight.fromJson(res.data);
       } else if (res.messageType == 'hotel'){
         hotel = Place.fromJson(res.data);
       } else if (res.messageType == 'places'){
         places = res.data.map<Place>((p) => Place.fromJson(p)).toList();
+      } else if (res.messageType == 'food'){
+        food = res.data.map<Place>((p) => Place.fromJson(p)).toList();
       }
     }
 

@@ -46,10 +46,10 @@ class DataProvider:
         return res
 
     def get_food(self, origin):
-        results = self.client.venues.search(params={'near': origin, 'query': 'hotel', 'categoryId': '4d4b7105d754a06374d81259'})['venues']
+        results = self.client.venues.search(params={'near': origin, 'query': 'food', 'categoryId': '4d4b7105d754a06374d81259'})['venues']
         res = []
         for result in results:
-            res.append(Place(result, 'food'))
+            res.append(Place(result, 'food', price=random.randint(7, 25)))
 
         return res
 
@@ -57,6 +57,7 @@ class DataProvider:
         results = self.client.venues.search(params={'near': origin, '': 'sight', 'categoryId': '4d4b7104d754a06370d81259'})['venues']
         res = []
         for result in results:
-            res.append(Place(result, 'sight'))
-
+            res.append(Place(result, 'sight', score=random.randint(5, 10)))
+    
         return res
+        

@@ -19,4 +19,9 @@ class Answer:
             for place in self.data:
                 tmp.append(place.__dict__)
             res['data'] = tmp
+        elif self.messageType == 'food':
+            tmp = []
+            for food in self.data:
+                tmp.append(food.__dict__)
+            res['data'] = tmp
         return res

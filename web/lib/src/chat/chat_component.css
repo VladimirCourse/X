@@ -202,6 +202,7 @@ button {
           align-items: flex-end;
   position: relative;
 }
+
 .head-image__descr {
   position: relative;
   z-index: 2;
@@ -397,6 +398,22 @@ button {
   -webkit-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.08);
           box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.08);
 }
+.food__item {
+  width: 100%;
+  margin: 0 10px 10px 0;
+  background: #fff;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.08);
+          box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.08);
+}
+.food__item__img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  height: 100px;
+}
+
 .cards__item__img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;

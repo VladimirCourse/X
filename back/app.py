@@ -57,4 +57,23 @@ def hotel():
     if res:
         return json.dumps(res.__dict__)
 
+@route('/places', method=['OPTIONS', 'GET'])
+@enable_cors
+def places():
+    places = Database().get_places('abc')
+    res = []
+    for msg in places:
+        res.append(msg.__dict__)
+    return json.dumps(res)
+
+@route('/food', method=['OPTIONS', 'GET'])
+@enable_cors
+def food():
+    food = Database().get_food('abc')
+    res = []
+    for msg in food:
+        res.append(msg.__dict__)
+    return json.dumps(res)
+
+
 run(host='localhost', port=5000, debug=True)

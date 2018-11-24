@@ -67,23 +67,21 @@
                 </div>
             </div>
 
-            <div class="body-content__block">
+            <div *ngIf="food != null && food.isNotEmpty" class="body-content__block">
                 <h4 class="body-content__block__head">
-                    Еда в Милане
+                    Food in {{topic.destination.substring(0, 1).toUpperCase() + topic.destination.substring(1).toLowerCase()}}
                 </h4>
                 <div class="cards">
+                  <div *ngFor="let item of food; let i=index">
                     <div class="cards__item">
                         <div class="cards__item__img" style="background-image: url(img/food.jpg);"></div>
                         <div class="cards__item__descr">
-                            <p class="name">Le Cinq</p>
-                            <p class="mid">Средний чек</p>
-                            <p class="bott">€15</p>
-                        </div>
-                        <div class="cards__item__pick js-uniq-2">
-                            <p class="not-picked">Выбрать</p>
-                            <p class="picked">Выбрано</p>
+                            <p class="name">{{item.name}}</p>
+                            <p class="mid">Average price</p>
+                            <p class="bott">{{item.price}}€</p>
                         </div>
                     </div>
+                  </div>
                 </div>
             </div>
             <div *ngIf="places != null && places.isNotEmpty" class="body-content__block">
@@ -103,10 +101,10 @@
         </section>
         <div class="final-price">
             <div class="final-price__left">
-                <p><span>ИТОГО:</span>  13, 560 ₽</p>
+                <p><span>TOTAL:</span> €</p>
             </div>
             <div class="final-price__right">
-                <button>купить</button>
+                <button>BUY</button>
             </div>
         </div>
 

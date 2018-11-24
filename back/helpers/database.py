@@ -9,6 +9,7 @@ class Database:
             self.flights = {}
             self.hotels = {}
             self.places = {}
+            self.food = {}
 
     instance = None
     
@@ -47,7 +48,17 @@ class Database:
         self.instance.hotels[token] = hotel
 
     def get_places(self, token):
+        if token not in self.instance.places:
+            self.instance.places[token] = []
         return self.instance.places.get(token)
 
     def set_places(self, token, places):
         self.instance.places[token] = places
+
+    def get_food(self, token):
+        if token not in self.instance.food:
+            self.instance.food[token] = []
+        return self.instance.food.get(token)
+
+    def set_food(self, token, food):
+        self.instance.food[token] = food

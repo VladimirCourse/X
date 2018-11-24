@@ -20,6 +20,7 @@ class ChatService {
   static const String hotelUrl = 'http://localhost:5000/hotel';
   static const String messagesUrl = 'http://localhost:5000/messages';
   static const String placesUrl = 'http://localhost:5000/places';
+  static const String foodUrl = 'http://localhost:5000/food';
 
   Future<Message> sendMessage(String msg) async {
     var res = await http.post(msgUrl,
@@ -31,7 +32,10 @@ class ChatService {
       }),
     );
     if (res.statusCode == HttpStatus.ok){
-      return Message.fromJson(json.decode(res.body));
+      try{
+        return Message.fromJson(json.decode(res.body));
+      } catch (ex){
+      }
     } 
   }
 
@@ -42,7 +46,10 @@ class ChatService {
       },
     );
     if (res.statusCode == HttpStatus.ok){
-      return Topic.fromJson(json.decode(res.body));
+      try{
+        return Topic.fromJson(json.decode(res.body));
+      } catch (ex){
+      }
     } 
   }
 
@@ -53,7 +60,10 @@ class ChatService {
       },
     );
     if (res.statusCode == HttpStatus.ok){
-      return Flight.fromJson(json.decode(res.body));
+      try{
+        return Flight.fromJson(json.decode(res.body));
+      } catch (ex){
+      }
     } 
   }
 
@@ -64,7 +74,10 @@ class ChatService {
       },
     );
     if (res.statusCode == HttpStatus.ok){
-      return Place.fromJson(json.decode(res.body));
+      try{
+        return Place.fromJson(json.decode(res.body));
+      } catch (ex){
+      }
     } 
   }
 
@@ -75,7 +88,10 @@ class ChatService {
       },
     );
     if (res.statusCode == HttpStatus.ok){
-      return json.decode(res.body).map<Message>((p) => Message.fromJson(p)).toList();
+      try{
+        return json.decode(res.body).map<Message>((p) => Message.fromJson(p)).toList();
+      } catch (ex){
+      }
     } 
   }
 
@@ -86,7 +102,24 @@ class ChatService {
       },
     );
     if (res.statusCode == HttpStatus.ok){
-      return json.decode(res.body).map<Place>((p) => Place.fromJson(p)).toList();
+      try{
+        return json.decode(res.body).map<Place>((p) => Place.fromJson(p)).toList();
+      } catch (ex){
+      }
+    } 
+  }
+
+  Future<List<Place>> getFood() async {
+    var res = await http.get(foodUrl,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    );
+    if (res.statusCode == HttpStatus.ok){
+      try{
+        return json.decode(res.body).map<Place>((p) => Place.fromJson(p)).toList();
+      } catch (ex){
+      }
     } 
   }
 }
