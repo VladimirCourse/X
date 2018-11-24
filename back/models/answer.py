@@ -12,5 +12,7 @@ class Answer:
 
         if self.messageType == 'flights_from' or self.messageType == 'flights_to':
             res['data'] = self.data.__dict__
+        elif self.messageType =='hotel':
+            res['data'] = self.data.__dict__
 
         return res

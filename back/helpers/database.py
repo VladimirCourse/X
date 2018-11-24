@@ -1,11 +1,14 @@
 from models.topic import Topic
+from models.flight import Flight
 
 class Database:
     class __Database:
         def __init__(self):
             self.messages = {}
             self.topics = {}
-    
+            self.flights = {}
+            self.hotels = {}
+
     instance = None
     
     def __init__(self):
@@ -29,3 +32,15 @@ class Database:
 
     def set_topic(self, token, topic):
         self.instance.topics[token] = topic
+
+    def get_flight(self, token):
+        return self.instance.flights.get(token)
+
+    def set_flight(self, token, flight):
+        self.instance.flights[token] = flight
+  
+    def get_hotel(self, token):
+        return self.instance.hotels.get(token)
+
+    def set_hotel(self, token, hotel):
+        self.instance.hotels[token] = hotel

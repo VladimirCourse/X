@@ -8,6 +8,7 @@ import 'chat_service.dart';
 import 'models/message.dart';
 import 'models/flight.dart';
 import 'models/topic.dart';
+import 'models/place.dart';
 
 @Component(
   selector: 'chat',
@@ -33,23 +34,30 @@ class ChatComponent implements OnInit {
   List<Message> messages = [];
 
   Flight flight;
+  Place hotel;
   Topic topic = Topic();
+  List<Place> places;
 
-  ChatComponent(this.messageService);
+  ChatComponent(this.messageService); 
 
   @override
   Future<Null> ngOnInit() async {
     topic = await messageService.getTopic();
     messages = await messageService.getMessages();
+    flight = await messageService.getFlight();
+    hotel = await messageService.getHotel();
+    places = await messageService.getPlaces();
   }
 
   void add(String msg) async {
-    messages.add(Message(message: msg, isMy: true));
+    messages.add(Message(message: msg, messageType: 'my_message'));
     var res = await messageService.sendMessage(msg);
     topic = await messageService.getTopic();
     if (res != null){ 
       if (res.messageType == 'flights_from' || res.messageType == 'flights_to'){
         flight = Flight.fromJson(res.data);
+      } else if (res.messageType == 'hotel'){
+        hotel = Place.fromJson(res.data);
       }
     }
 
