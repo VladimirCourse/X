@@ -50,10 +50,10 @@ class ChatController:
             return coll[len(coll) // (self.poi.index(poi) + 2)] 
             
 
-    def interact(self, msg, token):
+    def interact(self, msg, token, user):
         result = self.luis.message(msg)
 
-        self.db.add_message(token, Answer('my_message', msg))
+        self.db.add_message(token, Answer('my_message', msg, user=user))
 
         try:
             if result.score >= 0.5:

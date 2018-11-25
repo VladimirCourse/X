@@ -14,21 +14,31 @@ import 'models/flight.dart';
 @Injectable()
 class ChatService {
 
-  static const String msgUrl = 'http://localhost:5000/message';
-  static const String topicUrl = 'http://localhost:5000/topic';
-  static const String flightUrl = 'http://localhost:5000/flight';
-  static const String hotelUrl = 'http://localhost:5000/hotel';
-  static const String messagesUrl = 'http://localhost:5000/messages';
-  static const String placesUrl = 'http://localhost:5000/places';
-  static const String foodUrl = 'http://localhost:5000/food';
+  static const String msgUrl = 'https://x-junctionback.herokuapp.com/message';
+  static const String topicUrl = 'https://x-junctionback.herokuapp.com/topic';
+  static const String flightUrl = 'https://x-junctionback.herokuapp.com/flight';
+  static const String hotelUrl = 'https://x-junctionback.herokuapp.com/hotel';
+  static const String messagesUrl = 'https://x-junctionback.herokuapp.com/messages';
+  static const String placesUrl = 'https://x-junctionback.herokuapp.com/places';
+  static const String foodUrl = 'https://x-junctionback.herokuapp.com/food';
 
-  Future<Message> sendMessage(String msg) async {
+
+  // static const String msgUrl = 'http://localhost:5000/message';
+  // static const String topicUrl = 'http://localhost:5000/topic';
+  // static const String flightUrl = 'http://localhost:5000/flight';
+  // static const String hotelUrl = 'http://localhost:5000/hotel';
+  // static const String messagesUrl = 'http://localhost:5000/messages';
+  // static const String placesUrl = 'http://localhost:5000/places';
+  // static const String foodUrl = 'http://localhost:5000/food';
+
+  Future<Message> sendMessage(String msg, String user) async {
     var res = await http.post(msgUrl,
       headers: {
         'Content-Type': 'application/json'
       },
       body: json.encode({
-        'message': msg
+        'message': msg,
+        'user': user
       }),
     );
     if (res.statusCode == HttpStatus.ok){

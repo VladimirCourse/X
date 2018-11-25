@@ -1,13 +1,15 @@
 class Answer:
-    def __init__(self, messageType, message=None,  data=None):
+    def __init__(self, messageType, message=None, data=None, user=None):
         self.messageType = messageType
         self.message = message
         self.data = data
+        self.user = user
 
     def dict(self):
         res = {
             'messageType': self.messageType,
-            'message': self.message
+            'message': self.message,
+            'user': self.user
         }
 
         if self.messageType == 'flights_from' or self.messageType == 'flights_to':

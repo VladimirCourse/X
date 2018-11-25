@@ -115,7 +115,7 @@
                 <div *ngIf="messages.isNotEmpty">
                   <ul>
                       <li *ngFor="let item of messages; let i=index">
-                        <div *ngIf="item.messageType == 'my_message'">
+                        <div *ngIf="item.user == 'user1'">
                           <div class="outgoing_msg">
                             <div class="sent_msg">
                               <p>{{item.message}}</p>
@@ -123,7 +123,7 @@
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="item.messageType == 'user_message'">
+                        <div *ngIf="item.user == 'user2'">
                           <div class="outgoing_msg">
                               <div class="incoming_msg">
                                 <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>

@@ -51,15 +51,23 @@ class ChatComponent implements OnInit {
     food = await messageService.getFood();
 
     Timer.periodic(Duration(seconds: 1), 
-      (timer) async{
-        messages = await messageService.getMessages();  
+      (timer) async {
+        var tmp = await messageService.getMessages();  
+        if (tmp.length != messages.length){
+          messages = tmp;
+          topic = await messageService.getTopic();
+          flight = await messageService.getFlight();
+          hotel = await messageService.getHotel();
+          places = await messageService.getPlaces();
+          food = await messageService.getFood();
+        }
       }
     );
   }
 
   void add(String msg) async {
-    messages.add(Message(message: msg, messageType: 'my_message'));
-    var res = await messageService.sendMessage(msg);
+    messages.add(Message(message: msg, messageType: 'my_message', user: 'user1'));
+    var res = await messageService.sendMessage(msg, 'user1');
     print(res.messageType);
     if (res != null){ 
       if (res.messageType == 'flights_from' || res.messageType == 'flights_to'){
