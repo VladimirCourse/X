@@ -80,8 +80,8 @@ class ChatComponent implements OnInit {
   }
 
   void add(String msg) async {
-    messages.add(Message(message: msg, messageType: 'my_message', user: 'user1', createdAt: DateFormat('hh:mm').format(DateTime.now())));
-    var res = await messageService.sendMessage(msg, 'user1');
+    messages.add(Message(message: msg, messageType: 'my_message', user: 'user2', createdAt: DateFormat('hh:mm').format(DateTime.now())));
+    var res = await messageService.sendMessage(msg, 'user2');
     print(res.messageType);
     if (res != null){ 
       if (res.messageType == 'flights_from' || res.messageType == 'flights_to'){

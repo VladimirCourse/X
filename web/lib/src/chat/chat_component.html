@@ -3,7 +3,9 @@
         <section class="head-image" style="background-image: url(img/baner-2.svg)">
             <div class="head-image__descr">
                 <h2 class="head-image__descr__name">{{topic.origin.substring(0, 1).toUpperCase() + topic.origin.substring(1).toLowerCase()}} - {{topic.destination.substring(0, 1).toUpperCase() + topic.destination.substring(1).toLowerCase()}}</h2>
-                
+                <br />
+                <h6><p style="color:white;"> {{topic.weatherTemp}}°C </p></h6>
+                <h6><p style="color:white;"> {{topic.weatherSuggestion}} </p></h6>
             </div>
         </section>
         
@@ -94,7 +96,7 @@
         </section>
         <div class="final-price">
             <div class="final-price__left">
-                <p><span>TOTAL:</span><h3><strong>{{sum}} €</strong></h3></p>
+                <p><span>TOTAL (7 days):</span><h3><strong>{{sum}} €</strong></h3></p>
             </div>
             <div class="final-price__right">
                 <button style= "width: 150px;">BUY    </button>
@@ -122,7 +124,7 @@
                         <div *ngIf="item.user == 'user2'">
                           <div class="outgoing_msg">
                               <div class="incoming_msg">
-                                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                
                                 <div class="received_msg">
                                   <div class="received_withd_msg">
                                     <p>{{item.message}}</p>
