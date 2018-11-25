@@ -65,7 +65,7 @@ class ChatComponent implements OnInit {
     Timer.periodic(Duration(seconds: 1), 
       (timer) async {
         var tmp = await messageService.getMessages();  
-        if (tmp.length != messages.length){
+        if (tmp.length > messages.length){
           messages = tmp;
           topic = await messageService.getTopic();
           flight = await messageService.getFlight();

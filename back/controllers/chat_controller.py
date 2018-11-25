@@ -3,7 +3,7 @@ from helpers.data_provider import DataProvider
 from helpers.database import Database
 from helpers.iata import Iata
 from weather import Weather, Unit
-
+from datetime import datetime
 from models.answer import Answer
 
 class ChatController:
@@ -53,7 +53,7 @@ class ChatController:
     def interact(self, msg, token, user):
         result = self.luis.message(msg)
 
-        self.db.add_message(token, Answer('my_message', msg, user=user))
+        self.db.add_message(token, Answer('my_message', msg, user=user, createdAt=datetime.now().strftime('%H:%M')))
 
         try:
             if result.score >= 0.5:
