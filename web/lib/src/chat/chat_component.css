@@ -75,7 +75,7 @@ ul {
  }
  .received_withd_msg p {
   background: #ebebeb none repeat scroll 0 0;
-  border-radius: 3px;
+  border-radius: 23px;
   color: #646464;
   font-size: 14px;
   margin: 0;
@@ -194,9 +194,9 @@ button {
 .head-image {
   position: fixed;
 top:0;
-min-width: 460px;
+min-width: 450px;
 z-index:1000;
-  min-height: 120px;
+  min-height: 140px;
   background-size: cover;
   background-position: top right;
   display: -webkit-box;
@@ -244,7 +244,7 @@ z-index:1000;
 }
 .body-content {
   background: #F7F7F7;
-  padding: 140px 30px ;
+  padding: 180px 30px ;
 }
 .body-content__block {
   margin-bottom: 25px;

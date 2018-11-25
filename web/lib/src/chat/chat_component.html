@@ -3,8 +3,7 @@
         <section class="head-image" style="background-image: url(img/baner-2.svg)">
             <div class="head-image__descr">
                 <h2 class="head-image__descr__name">{{topic.origin.substring(0, 1).toUpperCase() + topic.origin.substring(1).toLowerCase()}} - {{topic.destination.substring(0, 1).toUpperCase() + topic.destination.substring(1).toLowerCase()}}</h2>
-                <h6><p style="color:white;"> {{topic.weatherTemp}}°C </p></h6>
-                <h6><p style="color:white;"> {{topic.weatherSuggestion}} </p></h6>
+                
             </div>
         </section>
         
@@ -112,7 +111,7 @@
                 <div *ngIf="messages.isNotEmpty">
                   <ul>
                       <li *ngFor="let item of messages; let i=index">
-                        <div *ngIf="item.user == 'user1'">
+                        <div *ngIf="item.user == 'user2'">
                           <div class="outgoing_msg">
                             <div class="sent_msg">
                               <p>{{item.message}}</p>
@@ -120,7 +119,7 @@
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="item.user == 'user2'">
+                        <div *ngIf="item.user == 'user1'">
                           <div class="outgoing_msg">
                               <div class="incoming_msg">
                                 <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
