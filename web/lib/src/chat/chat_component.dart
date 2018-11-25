@@ -39,7 +39,19 @@ class ChatComponent implements OnInit {
   List<Place> places;
   List<Place> food;
 
+  int sum = 0;
+
   ChatComponent(this.messageService); 
+
+  void calcsum(){
+    sum = 0;
+    if (flight != null){
+      sum += flight.price.toInt();
+    }
+    if (hotel != null){
+      sum += hotel.price.toInt() * 7;
+    }
+  }
 
   @override
   Future<Null> ngOnInit() async {
@@ -49,6 +61,7 @@ class ChatComponent implements OnInit {
     hotel = await messageService.getHotel();
     places = await messageService.getPlaces();
     food = await messageService.getFood();
+    calcsum();
   }
 
   void add(String msg) async {
@@ -70,6 +83,8 @@ class ChatComponent implements OnInit {
         food = res.data.map<Place>((p) => Place.fromJson(p)).toList();
       }
     }
+
+    calcsum();
 
     topic = await messageService.getTopic();
 
