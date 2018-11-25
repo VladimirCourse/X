@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:intl/intl.dart';
 
 import 'chat_service.dart';
 
@@ -79,7 +80,7 @@ class ChatComponent implements OnInit {
   }
 
   void add(String msg) async {
-    messages.add(Message(message: msg, messageType: 'my_message', user: 'user1'));
+    messages.add(Message(message: msg, messageType: 'my_message', user: 'user1', createdAt: DateFormat('hh:mm').format(DateTime.now())));
     var res = await messageService.sendMessage(msg, 'user1');
     print(res.messageType);
     if (res != null){ 
