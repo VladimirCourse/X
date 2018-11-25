@@ -95,6 +95,14 @@ def food():
         res.append(msg.__dict__)
     return json.dumps(res)
 
+#just for demo
+@route('/reset_super_secr3t', method=['OPTIONS', 'GET'])
+@enable_cors
+def reset():
+    Database().flush()
+    return json.dumps({'result': 'ok'})
+
+
 
 run(server='wsgiref', host='0.0.0.0', port=argv[1])
 

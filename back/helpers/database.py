@@ -17,6 +17,15 @@ class Database:
         if not Database.instance:
             Database.instance = Database.__Database()
 
+    def flush(self):
+        self.instance.messages = {}
+        self.instance.topics = {}
+        self.instance.flights = {}
+        self.instance.hotels = {}
+        self.instance.places = {}
+        self.instance.food = {}
+
+
     def get_messages(self, token):
         if token not in self.instance.messages:
             self.instance.messages[token] = []

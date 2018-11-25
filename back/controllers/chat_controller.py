@@ -50,6 +50,7 @@ class ChatController:
             return coll[len(coll) // (self.poi.index(poi) + 2)] 
             
 
+
     def interact(self, msg, token, user):
         result = self.luis.message(msg)
 
